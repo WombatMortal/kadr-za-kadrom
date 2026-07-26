@@ -31,21 +31,21 @@ const candidates = [
     title: "Суспирия",
     meta: "реж. Л. Гуаданьино · 2018",
     country: "Италия / США",
-    image: "assets/suspiria-candidate.png",
+    image: "assets/suspiria-candidate.jpg",
   },
   {
     id: "angry-men",
     title: "12 разгневанных мужчин",
     meta: "реж. С. Люмет · 1957",
     country: "США",
-    image: "assets/angry-men-candidate.png",
+    image: "assets/angry-men-candidate.jpg",
   },
   {
     id: "beast",
     title: "Ученик чудовища",
     meta: "реж. Мамору Хосода · 2015",
     country: "Япония",
-    image: "assets/beast-apprentice-candidate.png",
+    image: "assets/beast-apprentice-candidate.jpg",
   },
 ];
 
@@ -411,7 +411,7 @@ export function App() {
 
         <figure className="hero-art">
           <img
-            src="assets/robot-dreams-editorial.png"
+            src="assets/robot-dreams-editorial.jpg"
             alt="Робот и пёс на фоне города — иллюстрация к фильму «Мечты робота»"
           />
           <figcaption className="review-sticker">
