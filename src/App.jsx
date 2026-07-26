@@ -95,14 +95,14 @@ const members = [
     color: "red",
   },
   {
-    avatar: "🧪",
+    avatar: "✈️",
     name: "Лина",
     role: "Участница клуба",
     taste: "Жанровое кино, яркие герои и живые обсуждения",
     line: "Успевает поесть до выхода новой обложки. Обычно.",
-    favoriteFilm: "Человеческая многоножка",
-    favoriteCharacter: "Доктор Хайтер",
-    pick: "Случайный выбор",
+    favoriteFilm: "Воздушная тюрьма",
+    favoriteCharacter: "Сайрус Гриссом",
+    pick: "Ответ участницы",
     color: "teal",
   },
   {
@@ -140,7 +140,7 @@ const members = [
   },
   {
     avatar: "🦖",
-    name: "Аня",
+    name: "АняФ",
     role: "Культурная экспедиция",
     taste: "Аниме, фестивальные находки и странные короткометражки",
     line: "Может принести в чат рыбу, искусство и отличный фильм.",
@@ -252,7 +252,7 @@ const clubRatings = [
   { name: "Анна", scores: [9, 9, 6, 8] },
   { name: "Тим", scores: [6, 7, 5, 7] },
   { name: "Оля", scores: [8, 8, 9, 8] },
-  { name: "Аня", scores: [7, 10, 6, 7] },
+  { name: "АняФ", scores: [7, 10, 6, 7] },
   { name: "Алексей", scores: [6, 7, 8, 6] },
   { name: "Маша", scores: [9, 8, 7, 9] },
   { name: "Кира", scores: [8, 9, 8, 8] },
@@ -262,6 +262,30 @@ const clubRatings = [
   { name: "Мари Л.", scores: [8, 7, 8, 9] },
   { name: "Сергей", scores: [8, 9, 7, 9] },
 ];
+
+const memberAccounts = [
+  { member: "Даша", login: "dasha", password: "Kadr29Dasha", meetings: 11, genre: "Драма" },
+  { member: "Лина", login: "lina", password: "Kadr29Lina", meetings: 7, genre: "Боевик" },
+  { member: "Анна", login: "anna", password: "Kadr29Anna", meetings: 9, genre: "Анимация" },
+  { member: "Тим", login: "tim", password: "Kadr29Tim", meetings: 10, genre: "Триллер" },
+  { member: "Оля", login: "olya", password: "Kadr29Olya", meetings: 8, genre: "Триллер" },
+  { member: "АняФ", login: "anyaf", password: "Kadr29AnyaF", meetings: 8, genre: "Аниме" },
+  { member: "Алексей", login: "alexey", password: "Kadr29Alex", meetings: 10, genre: "Детектив" },
+  { member: "Маша", login: "masha", password: "Kadr29Masha", meetings: 7, genre: "Драма" },
+  { member: "Кира", login: "kira", password: "Kadr29Kira", meetings: 6, genre: "Комедия" },
+  { member: "Дарья", login: "daria", password: "Kadr29Daria", meetings: 9, genre: "Авторское" },
+  { member: "Настя", login: "nastya", password: "Kadr29Nastya", meetings: 8, genre: "Триллер" },
+  { member: "Мари", login: "mari", password: "Kadr29Mari", meetings: 6, genre: "Драма" },
+  { member: "Мари Л.", login: "marie_l", password: "Kadr29Marie", meetings: 7, genre: "Артхаус" },
+  { member: "Сергей", login: "sergey", password: "Kadr29Sergey", meetings: 12, genre: "Фантастика" },
+];
+
+const initialPersonalRatings = Object.fromEntries(
+  memberAccounts.map((account) => {
+    const rating = clubRatings.find((person) => person.name === account.member);
+    return [account.login, rating?.scores[0] ?? 0];
+  }),
+);
 
 const archive = [
   {
@@ -330,12 +354,17 @@ export function App() {
   const [form, setForm] = useState(blankForm);
   const [submitted, setSubmitted] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
-  const [loggedUser, setLoggedUser] = useState("");
+  const [loggedAccount, setLoggedAccount] = useState(null);
   const [accountTab, setAccountTab] = useState("ratings");
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
-  const [personalRating, setPersonalRating] = useState(0);
+  const [personalRatings, setPersonalRatings] = useState(initialPersonalRatings);
+
+  const activeMember = loggedAccount
+    ? members.find((member) => member.name === loggedAccount.member)
+    : null;
+  const personalRating = loggedAccount ? personalRatings[loggedAccount.login] : 0;
 
   const flash = (message) => {
     setNotice(message);
@@ -372,24 +401,22 @@ export function App() {
 
   const submitLogin = (event) => {
     event.preventDefault();
-    const cleanName = loginForm.username.trim().replace(/^@/, "");
-    if (!/^[a-zA-Z0-9_]{3,32}$/.test(cleanName)) {
-      setLoginError("Введите Telegram-ник латиницей: от 3 до 32 символов.");
+    const cleanName = loginForm.username.trim().replace(/^@/, "").toLowerCase();
+    const account = memberAccounts.find(
+      (item) => item.login === cleanName && item.password === loginForm.password,
+    );
+    if (!account) {
+      setLoginError("Логин или пароль не совпали. Проверьте таблицу доступов.");
       return;
     }
-    if (loginForm.password.length < 6) {
-      setLoginError("Для демо-входа пароль должен содержать минимум 6 символов.");
-      return;
-    }
-    setLoggedUser(`@${cleanName}`);
+    setLoggedAccount(account);
     setLoginError("");
     setAccountTab("ratings");
   };
 
   const logout = () => {
-    setLoggedUser("");
+    setLoggedAccount(null);
     setLoginForm({ username: "", password: "" });
-    setPersonalRating(0);
     setLoginError("");
   };
 
@@ -411,7 +438,7 @@ export function App() {
 
         <button className="account-trigger" type="button" onClick={() => setAccountOpen(true)}>
           <UserCircle size={28} weight="duotone" aria-hidden="true" />
-          <span>{loggedUser || "Кабинет"}</span>
+          <span>{activeMember?.name || "Кабинет"}</span>
         </button>
       </header>
 
@@ -832,7 +859,7 @@ export function App() {
               </button>
             </header>
 
-            {!loggedUser ? (
+            {!loggedAccount ? (
               <div className="login-layout">
                 <div className="login-intro">
                   <Cat size={62} weight="duotone" aria-hidden="true" />
@@ -851,13 +878,13 @@ export function App() {
                   <div className="login-form-heading">
                     <SignIn size={32} weight="duotone" />
                     <div>
-                      <h3>Войти по Telegram</h3>
-                      <p>Демонстрационный вход для прототипа</p>
+                      <h3>Войти в клуб</h3>
+                      <p>У каждого участника свой демо-доступ</p>
                     </div>
                   </div>
 
                   <label>
-                    Ник в Telegram
+                    Логин участника
                     <input
                       required
                       name="username"
@@ -866,7 +893,7 @@ export function App() {
                         setLoginForm((current) => ({ ...current, username: event.target.value }));
                         setLoginError("");
                       }}
-                      placeholder="@username"
+                      placeholder="например, dasha"
                       autoComplete="username"
                     />
                   </label>
@@ -883,7 +910,7 @@ export function App() {
                           setLoginForm((current) => ({ ...current, password: event.target.value }));
                           setLoginError("");
                         }}
-                        placeholder="Минимум 6 символов"
+                        placeholder="Пароль из таблицы доступов"
                         autoComplete="current-password"
                       />
                       <button
@@ -904,8 +931,8 @@ export function App() {
 
                   <p className="auth-note">
                     <ShieldCheck size={19} weight="fill" />
-                    Пароль никуда не отправляется и не сохраняется. Для рабочей
-                    версии подключим подтверждение через Telegram-бота.
+                    Это демо-доступы для прототипа. Они не защищают реальные
+                    данные и не используются в других сервисах.
                   </p>
                 </form>
               </div>
@@ -913,10 +940,12 @@ export function App() {
               <div className="account-dashboard">
                 <div className="account-toolbar">
                   <div className="account-identity">
-                    <div>{loggedUser.slice(1, 2).toUpperCase()}</div>
+                    <div role="img" aria-label={`Аватар ${activeMember?.name}`}>
+                      {activeMember?.avatar}
+                    </div>
                     <span>
-                      <strong>{loggedUser}</strong>
-                      Участник киноклуба
+                      <strong>{activeMember?.name}</strong>
+                      @{loggedAccount.login} · {activeMember?.role}
                     </span>
                   </div>
                   <button type="button" onClick={logout}>
@@ -968,11 +997,20 @@ export function App() {
                         </thead>
                         <tbody>
                           {clubRatings.map((person) => {
-                            const average = person.scores.reduce((sum, score) => sum + score, 0) / person.scores.length;
+                            const scores = person.name === loggedAccount.member
+                              ? [personalRating, ...person.scores.slice(1)]
+                              : person.scores;
+                            const average = scores.reduce((sum, score) => sum + score, 0) / scores.length;
                             return (
-                              <tr key={person.name}>
-                                <th scope="row">{person.name}</th>
-                                {person.scores.map((score, index) => (
+                              <tr
+                                className={person.name === loggedAccount.member ? "your-rating-row" : ""}
+                                key={person.name}
+                              >
+                                <th scope="row">
+                                  {person.name}
+                                  {person.name === loggedAccount.member && <small>Вы</small>}
+                                </th>
+                                {scores.map((score, index) => (
                                   <td key={`${person.name}-${ratingFilms[index]}`}>
                                     <span className={score >= 9 ? "high-score" : score <= 6 ? "low-score" : ""}>
                                       {score}
@@ -983,14 +1021,6 @@ export function App() {
                               </tr>
                             );
                           })}
-                          <tr className="your-rating-row">
-                            <th scope="row">Вы</th>
-                            <td>{personalRating || "—"}</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>—</td>
-                            <td>{personalRating ? `${personalRating},0` : "—"}</td>
-                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -1014,7 +1044,10 @@ export function App() {
                             <button
                               type="button"
                               className={personalRating === score ? "selected" : ""}
-                              onClick={() => setPersonalRating(score)}
+                              onClick={() => setPersonalRatings((current) => ({
+                                ...current,
+                                [loggedAccount.login]: score,
+                              }))}
                               aria-pressed={personalRating === score}
                               key={score}
                             >
@@ -1026,12 +1059,23 @@ export function App() {
                       </section>
 
                       <section className="profile-stats">
-                        <div><strong>6</strong><span>встреч посещено</span></div>
+                        <div><strong>{loggedAccount.meetings}</strong><span>встреч посещено</span></div>
                         <div><strong>4</strong><span>фильма оценено</span></div>
-                        <div><strong>Драма</strong><span>любимый жанр</span></div>
+                        <div><strong>{loggedAccount.genre}</strong><span>любимый жанр</span></div>
                         <div><strong>02.08</strong><span>следующая встреча</span></div>
                       </section>
                     </div>
+
+                    <section className="profile-favorites" aria-label="Любимые фильм и персонаж">
+                      <div>
+                        <span>Любимый фильм</span>
+                        <strong>{activeMember?.favoriteFilm}</strong>
+                      </div>
+                      <div>
+                        <span>Любимый персонаж</span>
+                        <strong>{activeMember?.favoriteCharacter}</strong>
+                      </div>
+                    </section>
                   </div>
                 )}
               </div>
