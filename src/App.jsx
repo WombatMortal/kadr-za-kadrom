@@ -349,6 +349,7 @@ export function App() {
   const [watched, setWatched] = useState(false);
   const [attending, setAttending] = useState(false);
   const [vote, setVote] = useState("");
+  const [voteOpen, setVoteOpen] = useState(false);
   const [notice, setNotice] = useState("");
   const [selectedGenres, setSelectedGenres] = useState(["Драма"]);
   const [form, setForm] = useState(blankForm);
@@ -365,6 +366,7 @@ export function App() {
     ? members.find((member) => member.name === loggedAccount.member)
     : null;
   const personalRating = loggedAccount ? personalRatings[loggedAccount.login] : 0;
+  const selectedCandidate = candidates.find((candidate) => candidate.id === vote);
 
   const flash = (message) => {
     setNotice(message);
@@ -445,7 +447,12 @@ export function App() {
       <section className="feature-grid" id="now">
         <article className="film-copy">
           <p className="issue">Фильм недели №29</p>
-          <h1>Белое<br />пластиковое<br />небо</h1>
+          <h1>
+            <span>Белое</span>
+            <span className="film-title-long">пластиковое</span>
+            <span>небо</span>
+            <small>White Plastic Sky</small>
+          </h1>
           <p className="film-meta">Реж. Тибор Баноцки, Шаролта Сабо · Венгрия / Словакия · 2023 · 111 мин</p>
           <p className="synopsis">
             В 2123 году Земля осталась без растений и животных, а людей после
@@ -519,36 +526,34 @@ export function App() {
       </section>
 
       <section className="ballot" id="vote" aria-labelledby="ballot-title">
-        <div className="ballot-intro">
-          <p id="ballot-title">Следом:<br />голосование</p>
-          <span>до 22:00</span>
+        <div className="ballot-copy">
+          <span className="ballot-kicker">Следующий фильм · до 22:00</span>
+          <h2 id="ballot-title">Выбираем<br />вместе</h2>
+          <p>
+            Три фильма, один голос и достаточно места, чтобы прочитать
+            каждое название.
+          </p>
         </div>
 
-        <div className="candidate-list">
-          {candidates.map((candidate) => (
-            <label className={`candidate ${vote === candidate.id ? "chosen" : ""}`} key={candidate.id}>
-              <img src={candidate.image} alt="" />
-              <span className="candidate-copy">
-                <strong>{candidate.title}</strong>
-                <small>{candidate.meta}<br />{candidate.country}</small>
-              </span>
-              <input
-                type="radio"
-                name="candidate"
-                value={candidate.id}
-                checked={vote === candidate.id}
-                onChange={() => {
-                  setVote(candidate.id);
-                  flash(`Голос за «${candidate.title}» принят`);
-                }}
-              />
-              <span className="radio-mark" aria-hidden="true"></span>
-            </label>
-          ))}
+        <div className="ballot-action">
+          <div className="ballot-count">
+            <strong>3</strong>
+            <span>кандидата</span>
+          </div>
+          <div className="ballot-selection">
+            <span>{selectedCandidate ? "Ваш выбор" : "Голос ещё не выбран"}</span>
+            <strong>{selectedCandidate?.title || "Открыть список фильмов"}</strong>
+          </div>
+          <button type="button" onClick={() => setVoteOpen(true)}>
+            {selectedCandidate ? "Изменить голос" : "Голосовать"}
+            <ArrowRight size={24} weight="bold" />
+          </button>
         </div>
 
-        <aside className="deadline-note">
-          Голосуйте,<br />пока не поздно.<br />Потом будет<br />поздно.
+        <aside className="ballot-poster-note">
+          <span>Один участник</span>
+          <strong>Один голос</strong>
+          <span>Результат в чате</span>
         </aside>
       </section>
 
@@ -835,6 +840,66 @@ export function App() {
         <p>Частный онлайн-киноклуб · 2026</p>
         <a href="#join">Вступить в клуб <ArrowRight size={18} weight="bold" /></a>
       </footer>
+
+      {voteOpen && (
+        <div
+          className="vote-backdrop"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setVoteOpen(false);
+          }}
+        >
+          <section
+            className="vote-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="vote-modal-title"
+          >
+            <header className="vote-modal-header">
+              <div>
+                <span>Следующий фильм · до 22:00</span>
+                <h2 id="vote-modal-title">Голосование</h2>
+              </div>
+              <button type="button" onClick={() => setVoteOpen(false)} aria-label="Закрыть голосование">
+                <X size={30} weight="bold" />
+              </button>
+            </header>
+
+            <div className="candidate-list">
+              {candidates.map((candidate) => (
+                <label className={`candidate ${vote === candidate.id ? "chosen" : ""}`} key={candidate.id}>
+                  <img src={candidate.image} alt="" />
+                  <span className="candidate-copy">
+                    <strong>{candidate.title}</strong>
+                    <small>{candidate.meta}<br />{candidate.country}</small>
+                  </span>
+                  <input
+                    type="radio"
+                    name="candidate"
+                    value={candidate.id}
+                    checked={vote === candidate.id}
+                    onChange={() => {
+                      setVote(candidate.id);
+                      flash(`Голос за «${candidate.title}» принят`);
+                    }}
+                  />
+                  <span className="radio-mark" aria-hidden="true"></span>
+                </label>
+              ))}
+            </div>
+
+            <footer className="vote-modal-footer">
+              <p>
+                {selectedCandidate
+                  ? `Вы выбрали «${selectedCandidate.title}».`
+                  : "Выберите один фильм — голос можно изменить."}
+              </p>
+              <button type="button" onClick={() => setVoteOpen(false)} disabled={!vote}>
+                Готово <Check size={22} weight="bold" />
+              </button>
+            </footer>
+          </section>
+        </div>
+      )}
 
       {accountOpen && (
         <div
