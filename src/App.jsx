@@ -84,108 +84,158 @@ const rules = [
 
 const members = [
   {
-    initials: "Д",
+    avatar: "💼",
     name: "Даша",
     role: "Соосновательница и ведущая",
     taste: "Драмы, сложные семьи и фильмы, за которые хочется спорить",
     line: "Собирает всех в воскресенье и верит в «Грозовой перевал».",
+    favoriteFilm: "Зелёная миля",
+    favoriteCharacter: "Бобби Аксельрод",
+    pick: "Ответ участницы",
     color: "red",
   },
   {
-    initials: "Л",
+    avatar: "🧪",
     name: "Лина",
     role: "Участница клуба",
     taste: "Жанровое кино, яркие герои и живые обсуждения",
     line: "Успевает поесть до выхода новой обложки. Обычно.",
+    favoriteFilm: "Человеческая многоножка",
+    favoriteCharacter: "Доктор Хайтер",
+    pick: "Случайный выбор",
     color: "teal",
   },
   {
-    initials: "А",
+    avatar: "🐎",
     name: "Анна",
     role: "Разведка по релизам",
     taste: "Новинки, анимация и всё, что уже появилось в хорошем качестве",
     line: "Приносит новости раньше, чем их успевают попросить.",
+    favoriteFilm: "Облачный атлас",
+    favoriteCharacter: "Спирит",
+    pick: "Ответ участницы",
     color: "yellow",
   },
   {
-    initials: "Т",
+    avatar: "🌙",
     name: "Тим",
     role: "Мем-редактор",
     taste: "Провокации, меткие реплики и кино с поводом для панча",
     line: "Умеет превратить обсуждение в набор будущих цитат.",
+    favoriteFilm: "Под покровом ночи",
+    favoriteCharacter: "Кира Найтли",
+    pick: "Ответ участника",
     color: "ink",
   },
   {
-    initials: "О",
+    avatar: "🦈",
     name: "Оля",
     role: "Голос клуба",
     taste: "Триллеры, неожиданные финалы и эмоциональные реакции",
     line: "Ставит опрос там, где другие ещё формулируют вопрос.",
+    favoriteFilm: "Акулий торнадо",
+    favoriteCharacter: "Фин Шепард",
+    pick: "Случайный выбор",
     color: "blue",
   },
   {
-    initials: "А",
+    avatar: "🦖",
     name: "Аня",
     role: "Культурная экспедиция",
     taste: "Аниме, фестивальные находки и странные короткометражки",
     line: "Может принести в чат рыбу, искусство и отличный фильм.",
+    favoriteFilm: "Велоципастор",
+    favoriteCharacter: "Даг Джонс",
+    pick: "Случайный выбор",
     color: "coral",
   },
   {
-    initials: "А",
+    avatar: "⚔️",
     name: "Алексей",
     role: "Поставщик горячих дискуссий",
     taste: "Детективы, триллеры и кино, где можно поспорить",
     line: "Ждёт провокационную картину и заранее готовит аргументы.",
+    favoriteFilm: "Человек, изменивший всё",
+    favoriteCharacter: "Арагорн",
+    pick: "Ответ участника",
     color: "green",
   },
   {
-    initials: "М",
+    avatar: "🛞",
     name: "Маша",
     role: "Эмоциональный аналитик",
     taste: "Психологическое кино, драмы и фильмы с фем-повесткой",
     line: "Разбирает мотивацию героев до последней спорной сцены.",
+    favoriteFilm: "Шина",
+    favoriteCharacter: "Роберт — шина-убийца",
+    pick: "Случайный выбор",
     color: "purple",
   },
   {
-    initials: "К",
+    avatar: "🚕",
     name: "Кира",
     role: "Участница клуба",
     taste: "Кино без жанровых ограничений и точные реакции",
     line: "Может говорить редко, зато всегда по существу.",
+    favoriteFilm: "Такси 1–2",
+    favoriteCharacter: "Мистер Бин",
+    pick: "Фильм из ответа · герой выбран случайно",
     color: "yellow",
   },
   {
-    initials: "Д",
+    avatar: "🐈",
     name: "Дарья",
     role: "Куратор славянского кино",
     taste: "Авторское, российское и восточноевропейское кино",
     line: "Приносит фильмы, которые давно хотелось посмотреть.",
+    favoriteFilm: "Кошки",
+    favoriteCharacter: "Макавити",
+    pick: "Случайный выбор",
     color: "coral",
   },
   {
-    initials: "Н",
+    avatar: "🏴‍☠️",
     name: "Настя",
     role: "Участница клуба",
     taste: "Чёрные комедии, триллеры и Джеймс Макэвой",
     line: "Задаёт один вопрос, после которого начинается новый спор.",
+    favoriteFilm: "Гордость и предубеждение",
+    favoriteCharacter: "Монки Д. Луффи",
+    pick: "Ответ участницы",
     color: "blue",
   },
   {
-    initials: "М",
+    avatar: "🤡",
     name: "Мари",
     role: "Участница клуба",
     taste: "Истории о людях, отношениях и неожиданных решениях",
     line: "Смотрит на героев внимательнее, чем герои друг на друга.",
+    favoriteFilm: "Клоуны-убийцы из космоса",
+    favoriteCharacter: "Шорти",
+    pick: "Случайный выбор",
     color: "green",
   },
   {
-    initials: "М",
+    avatar: "🏹",
     name: "Мари Л.",
     role: "Участница клуба",
     taste: "Кино разных стран и разговоры после финальных титров",
     line: "Помогает клубу смотреть на фильмы с новой стороны.",
+    favoriteFilm: "Капитан Фантастик",
+    favoriteCharacter: "Амарендра Бахубали",
+    pick: "Ответ участницы",
     color: "teal",
+  },
+  {
+    avatar: "🪟",
+    name: "Сергей",
+    role: "Киномеханик и провокатор вопросов",
+    taste: "Классика, фантастика и герои, которые спорят с системой",
+    line: "Задаёт серьёзные вопросы в пятницу вечером и возвращается в титры.",
+    favoriteFilm: "Окно во двор",
+    favoriteCharacter: "Винсент Фриман",
+    pick: "Выбор Сергея",
+    color: "red",
   },
 ];
 
@@ -210,6 +260,7 @@ const clubRatings = [
   { name: "Настя", scores: [8, 7, 8, 8] },
   { name: "Мари", scores: [9, 8, 9, 8] },
   { name: "Мари Л.", scores: [8, 7, 8, 9] },
+  { name: "Сергей", scores: [8, 9, 7, 9] },
 ];
 
 const archive = [
@@ -491,7 +542,7 @@ export function App() {
           </p>
           <div className="club-stats" aria-label="Киноклуб в цифрах">
             <div><strong>6</strong><span>месяцев вместе</span></div>
-            <div><strong>13</strong><span>анкет участников</span></div>
+            <div><strong>14</strong><span>анкет участников</span></div>
             <div><strong>14:00</strong><span>каждое воскресенье</span></div>
           </div>
         </div>
@@ -527,12 +578,31 @@ export function App() {
         <div className="members-grid">
           {members.map((member) => (
             <article className="member-card" key={`${member.name}-${member.role}`}>
-              <div className={`member-mark ${member.color}`}>{member.initials}</div>
+              <div
+                className={`member-mark ${member.color}`}
+                role="img"
+                aria-label={`Тематическая аватарка: ${member.favoriteFilm} и ${member.favoriteCharacter}`}
+              >
+                {member.avatar}
+              </div>
               <div className="member-topline">
                 <h3>{member.name}</h3>
                 <span>{member.role}</span>
               </div>
               <p className="member-taste">{member.taste}</p>
+              <dl className="member-picks">
+                <div>
+                  <dt>Фильм</dt>
+                  <dd>{member.favoriteFilm}</dd>
+                </div>
+                <div>
+                  <dt>Персонаж</dt>
+                  <dd>{member.favoriteCharacter}</dd>
+                </div>
+              </dl>
+              <span className={`member-pick-source ${member.pick.includes("Случай") || member.pick.includes("случайно") ? "random" : ""}`}>
+                {member.pick}
+              </span>
               <p className="member-line">{member.line}</p>
             </article>
           ))}
@@ -883,7 +953,7 @@ export function App() {
 
                     <div className="ratings-summary">
                       <div><strong>8,1</strong><span>средняя оценка недели</span></div>
-                      <div><strong>13</strong><span>участников оценили</span></div>
+                      <div><strong>14</strong><span>участников оценили</span></div>
                       <div><strong>4</strong><span>фильма в сравнении</span></div>
                     </div>
 
