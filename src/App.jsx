@@ -190,7 +190,7 @@ const members = [
 ];
 
 const ratingFilms = [
-  "Мечты робота",
+  "Белое пластиковое небо",
   "Ученик чудовища",
   "Сядь за руль",
   "Опавшие листья",
@@ -366,12 +366,12 @@ export function App() {
 
       <section className="feature-grid" id="now">
         <article className="film-copy">
-          <p className="issue">Фильм недели №28</p>
-          <h1>Мечты<br />робота</h1>
-          <p className="film-meta">Реж. Пабло Бергер · Испания / Франция · 2023 · 102 мин</p>
+          <p className="issue">Фильм недели №29</p>
+          <h1>Белое<br />пластиковое<br />небо</h1>
+          <p className="film-meta">Реж. Тибор Баноцки, Шаролта Сабо · Венгрия / Словакия · 2023 · 111 мин</p>
           <p className="synopsis">
-            Анимация про одиночество, дружбу и то, что делает нас людьми.
-            Без слов — с точным попаданием в сердце.
+            В 2123 году Земля осталась без растений и животных, а людей после
+            пятидесяти превращают в деревья. Стефан нарушает правила, чтобы спасти жену.
           </p>
 
           <button
@@ -411,31 +411,31 @@ export function App() {
 
         <figure className="hero-art">
           <img
-            src="assets/robot-dreams-editorial.jpg"
-            alt="Робот и пёс на фоне города — иллюстрация к фильму «Мечты робота»"
+            src="assets/white-plastic-sky-week.jpg"
+            alt="Постер анимационного фильма «Белое пластиковое небо»"
           />
           <figcaption className="review-sticker">
-            <strong>★★★★</strong>
-            <span>Пронзительно<br />и очень смешно</span>
+            <strong>2123</strong>
+            <span>Любовь после<br />конца природы</span>
           </figcaption>
-          <span className="art-note">Люди тоже иногда тупят</span>
+          <span className="art-note">В пятьдесят — на плантацию</span>
           <div className="award-strip">
             <FilmStrip size={28} weight="duotone" aria-hidden="true" />
-            <span>Лучший европейский<br />анимационный фильм</span>
+            <span>Berlinale 2023<br />Encounters</span>
           </div>
         </figure>
 
         <aside className="event-column" aria-label="Информация о встрече">
           <p className="eyebrow">Воскресенье</p>
-          <p className="event-date">26.07</p>
+          <p className="event-date">02.08</p>
           <p className="event-time">— 14:00</p>
           <div className="countdown">
             <span>Осталось</span>
-            <p><strong>1</strong> день</p>
-            <p><strong>18</strong> часов</p>
+            <p><strong>7</strong> дней</p>
+            <p><strong>0</strong> часов</p>
           </div>
           <blockquote>
-            «А фильмы для<br />киноклуба ещё<br />и смотреть надо?»
+            «А экологическая<br />катастрофа точно<br />была в программе?»
           </blockquote>
         </aside>
       </section>
@@ -930,7 +930,7 @@ export function App() {
                     <div className="cabinet-heading">
                       <div>
                         <span>Фильм недели</span>
-                        <h3>Мечты робота</h3>
+                        <h3>Белое пластиковое небо</h3>
                       </div>
                       <Star size={42} weight="duotone" />
                     </div>
@@ -959,7 +959,7 @@ export function App() {
                         <div><strong>6</strong><span>встреч посещено</span></div>
                         <div><strong>4</strong><span>фильма оценено</span></div>
                         <div><strong>Драма</strong><span>любимый жанр</span></div>
-                        <div><strong>26.07</strong><span>следующая встреча</span></div>
+                        <div><strong>02.08</strong><span>следующая встреча</span></div>
                       </section>
                     </div>
                   </div>

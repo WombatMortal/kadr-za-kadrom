@@ -5,3 +5,11 @@ dist/
 .env
 .env.*
 !.env.example
+AGENTS.md
+design-qa.md
+package-lock.json
+public/assets/angry-men-candidate.png
+public/assets/beast-apprentice-candidate.png
+public/assets/robot-dreams-editorial.jpg
+public/assets/robot-dreams-editorial.png
+public/assets/suspiria-candidate.png
