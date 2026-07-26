@@ -438,7 +438,12 @@ export function App() {
           <a className="join-link" href="#join">Вступить</a>
         </nav>
 
-        <button className="account-trigger" type="button" onClick={() => setAccountOpen(true)}>
+        <button
+          className="account-trigger"
+          type="button"
+          onClick={() => setAccountOpen(true)}
+          aria-label={activeMember ? `Открыть кабинет: ${activeMember.name}` : "Открыть личный кабинет"}
+        >
           <UserCircle size={28} weight="duotone" aria-hidden="true" />
           <span>{activeMember?.name || "Кабинет"}</span>
         </button>
@@ -672,7 +677,10 @@ export function App() {
       <section className="join-section" id="join" aria-labelledby="join-title">
         <div className="join-intro">
           <span className="section-number">/ 04</span>
-          <h2 id="join-title">Хочу<br />в клуб</h2>
+          <h2 id="join-title">
+            <span>Хочу</span>
+            <span>в клуб</span>
+          </h2>
           <p>
             Ищем людей, которые готовы смотреть кино, приходить на обсуждения
             и уважать чужую любовь к сомнительным фильмам.
